@@ -102,7 +102,7 @@ class CinescopeLoginPage:
         self.email_input = page.get_by_role("textbox", name="Email")
         self.password_input = page.get_by_role("textbox", name="Пароль")
 
-        self.login_button = "button[data-qa-id='login_submit_button']"
+        self.login_button = "xpath=/html/body/div[2]/div/div/form/div[2]/button"
         self.register_link = page.get_by_role("link", name="Зарегистрироваться")
 
     def go_to_home_page(self):
