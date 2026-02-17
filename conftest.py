@@ -32,15 +32,13 @@ def test_password():
 
 
 @pytest.fixture(name="test_user")
-def test_user_data() -> UserData:
+def test_user_data(test_email: str, test_name: str, test_password: str) -> UserData:
     """Генерация случайного пользователя для тестов."""
-    random_email = DataGenerator.generate_random_email()
-    random_name = DataGenerator.generate_random_name()
-    random_password = DataGenerator.generate_random_password()
+    random_password = test_password
 
     return UserData(
-        email=random_email,
-        fullName=random_name,
+        email=test_email,
+        fullName=test_name,
         password=random_password,
         passwordRepeat=random_password,
         roles=[Roles.USER],
