@@ -87,3 +87,66 @@ class CinescopeRegisterPage:
         expect(notification_locator).to_be_visible()
         notification_locator.wait_for(state="hidden")
         expect(notification_locator).not_to_be_visible()
+
+
+class CinescopeLoginPage:
+    """Класс для работы со страницей логина"""
+
+    def __init__(self, page: Page):
+        self.page = page
+        self.url = CINESCOPE_LOGIN_LINK
+
+        self.home_button = page.get_by_role("link", name="Cinescope")
+        self.all_movies_button = page.get_by_role("link", name="Все фильмы")
+
+        self.email_input = page.get_by_role("textbox", name="Email")
+        self.password_input = page.get_by_role("textbox", name="Пароль")
+
+        self.login_button = "button[data-qa-id='login_submit_button']"
+        self.register_link = page.get_by_role("link", name="Зарегистрироваться")
+
+    def go_to_home_page(self):
+        """Переход на главную страницу."""
+        self.home_button.click()
+        self.page.wait_for_url(CINESCOPE_MAIN_LINK)
+
+    def go_to_all_movies(self):
+        """Переход на страницу 'Все фильмы'."""
+        self.all_movies_button.click()
+        self.page.wait_for_url(CINESCOPE_MOVIES_LINK)
+
+    def open(self):
+        """Переход на страницу регистрации."""
+        self.page.goto(self.url)
+
+    def enter_email(self, email: str):
+        """Ввод email"""
+        self.email_input.fill(email)
+
+    def enter_password(self, password: str):
+        """Ввод пароля"""
+        self.password_input.fill(password)
+
+    def click_login_button(self):
+        """Клик по кнопке входа"""
+        self.page.click(self.login_button)
+
+    # Дополнительные действия
+    def login(self, email: str, password: str):
+        """Полный процесс входа"""
+        self.enter_email(email)
+        self.enter_password(password)
+        self.click_login_button()
+
+    def wait_redirect_to_home_page(self):
+        """Ожидание перехода на домашнюю страницу"""
+        self.page.wait_for_url(CINESCOPE_MAIN_LINK)
+        expect(self.page).to_have_url(CINESCOPE_MAIN_LINK)
+
+    def check_allert(self):
+        """Проверка всплывающего сообщения после редиректа"""
+        notification_locator = self.page.get_by_text("Вы вошли в аккаунт")
+
+        expect(notification_locator).to_be_visible()
+        notification_locator.wait_for(state="hidden")
+        expect(notification_locator).not_to_be_visible()
