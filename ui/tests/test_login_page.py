@@ -16,3 +16,5 @@ class TestLoginPage:
 
         login_page.wait_redirect_to_home_page()
         login_page.check_allert()
+
+        time.sleep(3)

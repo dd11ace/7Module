@@ -72,16 +72,6 @@ def registered_user(requester: CustomRequester, test_user: UserData) -> UserData
 
 
 @pytest.fixture(scope="session")
-def session() -> requests.Session:
-    """
-    Фикстура для создания HTTP-сессии.
-    """
-    http_session = requests.Session()
-    yield http_session
-    http_session.close()
-
-
-@pytest.fixture(scope="session")
 def browser(playwright: Playwright):
     browser = playwright.chromium.launch(headless=False)
     yield browser
