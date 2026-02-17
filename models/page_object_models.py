@@ -1,9 +1,7 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
 from constants import (
     CINESCOPE_LOGIN_LINK,
-    CINESCOPE_MAIN_LINK,
-    CINESCOPE_MOVIES_LINK,
     CINESCOPE_REGISTER_LINK,
 )
 from models.base_page import BasePage
@@ -38,7 +36,7 @@ class CinescopeRegisterPage(BasePage):
         self.enter_text_to_element(self.full_name_input, full_name)
         self.enter_text_to_element(self.email_input, email)
         self.enter_text_to_element(self.password_input, password)
-        self.enter_text_to_element(self.repeat_password_input, password)
+        self.enter_text_to_element(self.repeat_password_input, confirm_password)
 
         self.click_element(self.register_button)
 
@@ -59,7 +57,8 @@ class CinescopeLoginPage(BasePage):
         self.email_input = page.get_by_role("textbox", name="Email")
         self.password_input = page.get_by_role("textbox", name="Пароль")
 
-        self.login_button = "xpath=/html/body/div[2]/div/div/form/div[2]/button"
+        self.login_button = page.locator("form").get_by_role("button", name="Войти")
+
         self.register_link = page.get_by_role("link", name="Зарегистрироваться")
 
     def open(self):

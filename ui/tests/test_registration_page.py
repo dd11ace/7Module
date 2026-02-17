@@ -27,15 +27,16 @@ class TestRegistrationPage:
         random_password = test_password
         register_page = CinescopeRegisterPage(page)
         register_page.open()
-        with allure.step("Заполнение полей"):
-            register_page.register(
-                f"PlaywrightTest {test_name}",
-                test_email,
-                random_password,
-                random_password,
-            )
-        with allure.step("Валидация результата"):
-            register_page.assert_was_redirect_to_login_page()
-            register_page.make_screenshot_and_attach_to_allure()
-            register_page.assert_allert_was_pop_up()
+
+        register_page.register(
+            f"PlaywrightTest {test_name}",
+            test_email,
+            random_password,
+            random_password,
+        )
+
+        register_page.assert_was_redirect_to_login_page()
+        register_page.make_screenshot_and_attach_to_allure()
+        register_page.assert_allert_was_pop_up()
+
         time.sleep(3)

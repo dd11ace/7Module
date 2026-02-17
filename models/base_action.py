@@ -1,5 +1,5 @@
 import allure
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page, Locator, expect
 
 
 class PageAction:
@@ -11,12 +11,12 @@ class PageAction:
         self.page.goto(url)
 
     @allure.step("Ввод текста {text} в поле {locator}")
-    def enter_text_to_element(self, locator: str, text: str):
-        self.page.fill(locator, text)
+    def enter_text_to_element(self, locator: Locator, text: str):
+        self.page.locator(locator.fill(text))
 
     @allure.step('Клик по элементу "{locator}"')
-    def click_element(self, locator: str):
-        self.page.click(locator)
+    def click_element(self, locator: Locator):
+        self.page.locator(locator.click())
 
     @allure.step("Ожидание загрузки страницы: {url}")
     def wait_redirect_for_url(self, url: str):
@@ -24,13 +24,13 @@ class PageAction:
         expect(self.page).to_have_url(url)
 
     @allure.step("Получение текста элемента: {locator}")
-    def get_element_text(self, locator: str) -> str:
+    def get_element_text(self, locator: Locator) -> str:
         return self.page.locator(locator).text_content()
 
     @allure.step(
         "Ожидание появления или исчезновения элемента: {locator}, state = {state}"
     )
-    def wait_for_element(self, locator: str, state: str = "visible"):
+    def wait_for_element(self, locator: Locator, state: str = "visible"):
         self.page.locator(locator).wait_for(state=state)
 
     @allure.step("Скриншот текущей страиницы")

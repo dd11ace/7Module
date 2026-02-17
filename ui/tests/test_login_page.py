@@ -25,11 +25,10 @@ class TestLoginPage:
         login_page = CinescopeLoginPage(page)
         login_page.open()
 
-        with allure.step("Заполнение данных и нажатие отправка формы login"):
-            login_page.login(registered_user.email, registered_user.password)
-        with allure.step("Валидация результа"):
-            login_page.assert_was_redirect_to_home_page()
-            login_page.make_screenshot_and_attach_to_allure()
-            login_page.assert_allert_was_pop_up()
+        login_page.login(registered_user.email, registered_user.password)
+
+        login_page.assert_was_redirect_to_home_page()
+        login_page.make_screenshot_and_attach_to_allure()
+        login_page.assert_allert_was_pop_up()
 
         time.sleep(3)
