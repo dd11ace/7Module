@@ -2,6 +2,28 @@ import pytest
 from playwright.sync_api import Playwright, Browser, BrowserContext
 from common.tools import Tools
 from constants import DEFAULT_UI_TIMEOUT
+from utils.data_generator import DataGenerator
+
+
+@pytest.fixture
+def test_email():
+    """Возвращает случайный email"""
+    email = DataGenerator.generate_random_email()
+    return email
+
+
+@pytest.fixture
+def test_name():
+    """Возвращает случайное имя"""
+    name = DataGenerator.generate_random_name()
+    return name
+
+
+@pytest.fixture
+def test_password():
+    """Возвращает случайный пароль"""
+    password = DataGenerator.generate_random_password()
+    return password
 
 
 @pytest.fixture(scope="session")

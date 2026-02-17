@@ -31,12 +31,12 @@ class CinescopeRegisterPage:
 
     def go_to_home_page(self):
         """Переход на главную страницу."""
-        self.page.click(self.home_button)
+        self.home_button.click()
         self.page.wait_for_url(CINESCOPE_MAIN_LINK)
 
     def go_to_all_movies(self):
         """Переход на страницу 'Все фильмы'."""
-        self.page.click(self.all_movies_button)
+        self.all_movies_button.click()
         self.page.wait_for_url(CINESCOPE_MOVIES_LINK)
 
     def open(self):
@@ -45,23 +45,23 @@ class CinescopeRegisterPage:
 
     def enter_full_name(self, full_name: str):
         """Ввод full_name"""
-        self.page.fill(self.full_name_input, full_name)
+        self.full_name_input.fill(full_name)
 
     def enter_email(self, email: str):
         """Ввод email"""
-        self.page.fill(self.email_input, email)
+        self.email_input.fill(email)
 
     def enter_password(self, password: str):
         """Ввод пароля"""
-        self.page.fill(self.password_input, password)
+        self.password_input.fill(password)
 
     def enter_repeat_password(self, password: str):
         """Ввод подтверждения пароля"""
-        self.page.fill(self.repeat_password_input, password)
+        self.repeat_password_input.fill(password)
 
     def click_register_button(self):
         """Клик по кнопке регистрации"""
-        self.page.click(self.register_button)
+        self.register_button.click()
 
     # Дополнительные действия
     def register(
