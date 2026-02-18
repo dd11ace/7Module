@@ -34,12 +34,14 @@ class UserData(BaseModel):
 
         result = []
         for role in roles:
-            if isinstance(role, Roles):
-                result.append(role.value)
-            elif isinstance(role, str):
-                result.append(role)
-            else:
-                result.append(str(role))
+            match role:
+                case Roles():
+                    result.append(role.value)
+                case str():
+                    result.append(role)
+                case other:
+                    result.append(str(other))
+
         return result
 
     def get_roles_as_strings(self) -> list[str]:
