@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import BaseModel, Field
 from typing import Literal, Annotated, Optional
 
@@ -12,6 +13,4 @@ class MovieBase(BaseModel):
     published: bool
     genreId: Annotated[int, Field(ge=1, le=10)]
     rating: Optional[int | float] = None
-    createdAt: Optional[str] = Field(
-        None, pattern=r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$"
-    )
+    createdAt: Optional[datetime] = None
