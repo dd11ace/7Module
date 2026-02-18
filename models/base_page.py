@@ -1,5 +1,5 @@
 import allure
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
 from constants import CINESCOPE_MAIN_LINK, CINESCOPE_MOVIES_LINK
 from models.base_action import PageAction

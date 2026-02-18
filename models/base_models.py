@@ -47,7 +47,3 @@ class UserData(BaseModel):
                     result.append(str(other))
 
         return result
-
-    def get_roles_as_strings(self) -> list[str]:
-        """Возвращает роли в виде списка строк."""
-        return self.serialize_roles(self.roles)
