@@ -1,6 +1,5 @@
 import pytest
 import allure
-import time
 from playwright.sync_api import Page
 
 from models.page_object_models import CinescopeRegisterPage
@@ -38,5 +37,3 @@ class TestRegistrationPage:
         register_page.assert_was_redirect_to_login_page()
         register_page.make_screenshot_and_attach_to_allure()
         register_page.assert_allert_was_pop_up()
-
-        time.sleep(3)

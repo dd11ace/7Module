@@ -47,8 +47,3 @@ class UserData(BaseModel):
     def get_roles_as_strings(self) -> list[str]:
         """Возвращает роли в виде списка строк."""
         return self.serialize_roles(self.roles)
-
-    @property
-    def roles_strings(self) -> list[str]:
-        """Property для получения ролей в виде строк."""
-        return self.get_roles_as_strings()

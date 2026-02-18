@@ -1,3 +1,5 @@
+import allure
+import pytest
 from playwright.sync_api import Page
 
 from constants import (
@@ -7,6 +9,10 @@ from constants import (
 from models.base_page import BasePage
 
 
+@allure.epic("Регистрация")
+@allure.feature("Страница регистрации")
+@allure.tag("ui")
+@pytest.mark.ui
 class CinescopeRegisterPage(BasePage):
     """Класс для работы со страницей регистрации"""
 
@@ -47,6 +53,10 @@ class CinescopeRegisterPage(BasePage):
         self.check_pop_up_element_with_text("Подтвердите свою почту")
 
 
+@allure.epic("Авторизация")
+@allure.feature("Страница авторизации")
+@allure.tag("ui")
+@pytest.mark.ui
 class CinescopeLoginPage(BasePage):
     """Класс для работы со страницей логина"""
 

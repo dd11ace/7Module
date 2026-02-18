@@ -1,6 +1,5 @@
 import pytest
 import allure
-import time
 from playwright.sync_api import Page
 from models.base_models import UserData
 from models.page_object_models import CinescopeLoginPage
@@ -30,5 +29,3 @@ class TestLoginPage:
         login_page.assert_was_redirect_to_home_page()
         login_page.make_screenshot_and_attach_to_allure()
         login_page.assert_allert_was_pop_up()
-
-        time.sleep(3)
