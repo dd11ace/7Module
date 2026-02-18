@@ -1,4 +1,5 @@
 import allure
+from datetime import datetime
 from playwright.sync_api import Page, Locator, expect
 
 
@@ -35,7 +36,8 @@ class PageAction:
 
     @allure.step("Скриншот текущей страиницы")
     def make_screenshot_and_attach_to_allure(self):
-        screenshot_path = "screenshot.png"
+        current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        screenshot_path = f"screenshot {current_time}.png"
         self.page.screenshot(path=screenshot_path, full_page=True)
 
         # Прикрепление скриншота к Allure-отчёту
