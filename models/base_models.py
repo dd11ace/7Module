@@ -1,4 +1,6 @@
-from pydantic import BaseModel, Field, field_validator, field_serializer
+from datetime import datetime
+
+from pydantic import BaseModel, Field, field_validator, field_serializer, EmailStr
 from typing import Optional
 
 from enums.roles import Roles
@@ -6,9 +8,11 @@ from enums.roles import Roles
 
 class UserData(BaseModel):
     id: Optional[str | int] = None
-    email: str
+    email: EmailStr
     fullName: str
     password: str
+    createdAt: Optional[datetime] = None
+    updatedAt: Optional[datetime] = None
     passwordRepeat: str = Field(
         ...,
         min_length=1,

@@ -3,6 +3,9 @@ import string
 import datetime
 from faker import Faker
 
+from models.base_models import UserData
+from models.movie_models import MovieBase
+
 faker = Faker()
 
 
@@ -68,33 +71,34 @@ class DataGenerator:
         return movie_data
 
     @staticmethod
-    def generate_movie_data() -> dict:
-        return {
-            "id": random.randint(50000, 60000),
-            "name": faker.sentence(nb_words=3),
-            "price": random.randint(100, 1000),
-            "description": faker.text(max_nb_chars=200),
-            "image_url": faker.image_url(),
-            "location": random.choice(["SPB", "MSK"]),
-            "published": random.choice([True, False]),
-            "rating": random.randint(1, 5),
-            "genre_id": random.randint(1, 10),
-            "created_at": datetime.datetime.now(),
-        }
+    def generate_movie_data() -> MovieBase:
+        """Генерирует данные фильма"""
+        return MovieBase(
+            id=random.randint(50000, 60000),
+            name=faker.sentence(nb_words=3),
+            price=random.randint(100, 1000),
+            description=faker.text(max_nb_chars=200),
+            imageUrl=faker.image_url(),
+            location=random.choice(["SPB", "MSK"]),
+            published=random.choice([True, False]),
+            rating=random.randint(1, 5),
+            genreId=random.randint(1, 10),
+            createdAt=datetime.datetime.now(),
+        )
 
     @staticmethod
-    def generate_user_data() -> dict:
+    def generate_user_data() -> UserData:
         """Генерирует данные для тестового пользователя"""
         from uuid import uuid4
 
-        return {
-            "id": f"{uuid4()}",  # генерируем UUID как строку
-            "email": DataGenerator.generate_random_email(),
-            "full_name": DataGenerator.generate_random_name(),
-            "password": DataGenerator.generate_random_password(),
-            "created_at": datetime.datetime.now(),
-            "updated_at": datetime.datetime.now(),
-            "verified": False,
-            "banned": False,
-            "roles": "{USER}",
-        }
+        return UserData(
+            id=f"{uuid4()}",
+            email=DataGenerator.generate_random_email(),
+            fullName=DataGenerator.generate_random_name(),
+            password=DataGenerator.generate_random_password(),
+            createdAt=datetime.datetime.now(),
+            updatedAt=datetime.datetime.now(),
+            verified=False,
+            banned=False,
+            roles="{USER}",
+        )
