@@ -37,14 +37,15 @@ class PageAction:
     @allure.step("Скриншот текущей страиницы")
     def make_screenshot_and_attach_to_allure(self):
         current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        screenshot_path = f"screenshot{current_time}.png"
+        screenshot_name = f"screenshot{current_time}.png"
+        screenshot_path = f"screenshots/{screenshot_name}"
         self.page.screenshot(path=screenshot_path, full_page=True)
 
         # Прикрепление скриншота к Allure-отчёту
         with open(screenshot_path, "rb") as file:
             allure.attach(
                 file.read(),
-                name=f"screenshot{current_time}",
+                name=screenshot_name,
                 attachment_type=allure.attachment_type.PNG,
             )
 
